@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.temsoft</groupId>
+    <artifactId>cztTest</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>oms-model</module>
+        <module>oms</module>
+        <module>shop</module>
+    </modules>
+
+    <description>
+        昌职天铭基地-售票管理系统
+    </description>
+
+    <properties>
+        <spring.data>2.2.1.RELEASE</spring.data>
+        <hadoop.version>2.7.1</hadoop.version>
+        <hbase.version>1.2.1</hbase.version>
+
+        <spring.version>4.3.10.RELEASE</spring.version>
+        <shiro.version>1.2.4</shiro.version>
+        <quartz.version>2.2.2</quartz.version>
+        <aspectj.version>1.7.4</aspectj.version>
+        <faster.jackson.version>2.7.5</faster.jackson.version>
+        <slftj.version>1.7.6</slftj.version>
+        <logback.version>1.1.3</logback.version>
+        <oltu.version>1.0.1</oltu.version>
+        <es.version>2.2.0</es.version>
+        <zxing.version>3.2.1</zxing.version>
+
+        <dubbo.version>2.5.7</dubbo.version>
+        <zkclient.version>0.1</zkclient.version>
+        <zookeeper.version>3.4.6</zookeeper.version>
+
+        <file-charset>UTF-8</file-charset>
+        <jdk-version>1.8</jdk-version>
+        <skip-test>true</skip-test>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin><!--跳过测试-->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.5</version>
+                <configuration>
+                    <skipTests>${skip-test}</skipTests>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.5.1</version>
+                <configuration>
+                    <target>${jdk-version}</target>
+                    <source>${jdk-version}</source>
+                    <encoding>${file-charset}</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.5</version>
+                <configuration>
+                    <encoding>${file-charset}</encoding>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+</project>

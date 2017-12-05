@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
+        name="es">
+    <diskStore path="java.io.tmpdir/shopEhcache"/>
+
+    <!--Shiro 框架中用到的缓存-->
+    <cache name="passwordRetryCache"
+           maxEntriesLocalHeap="2000"
+           eternal="false"
+           timeToIdleSeconds="3600"
+           timeToLiveSeconds="0"
+           overflowToDisk="false"
+           statistics="true">
+    </cache>
+
+    <cache name="shiro-authenticationCache"
+           maxElementsInMemory="1000"
+           eternal="true"
+           overflowToDisk="true">
+    </cache>
+    <cache name="shiro-authorizationCache"
+           maxElementsInMemory="1000"
+           eternal="true"
+           overflowToDisk="true">
+    </cache>
+
+    <cache name="shiro-activeSessionCache"
+           maxElementsInMemory="1000"
+           eternal="true"
+           overflowToDisk="true">
+    </cache>
+
+    <cache name="shiro-kickout-session"
+           maxEntriesLocalHeap="2000"
+           eternal="false"
+           timeToIdleSeconds="3600"
+           timeToLiveSeconds="0"
+           overflowToDisk="false"
+           statistics="true">
+    </cache>
+</ehcache>

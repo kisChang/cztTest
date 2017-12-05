@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+          http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- 开启AOP监听 只对当前配置文件有效 -->
+    <aop:aspectj-autoproxy expose-proxy="true"/>
+
+
+    <!-- 提供方应用信息 -->
+    <dubbo:application name="CZTemManager_ServiceConsumer" />
+    <!-- 使用zookeeper注册中心暴露服务地址 -->
+    <dubbo:registry address="zookeeper://127.0.0.1:2181" />
+    <!-- 用dubbo协议在 20881 端口暴露服务 -->
+    <dubbo:protocol port="20881" />
+
+    <!--超时时间改为2000毫秒 默认重试两次-->
+    <!--特殊方法单独配置-->
+    <dubbo:consumer timeout="6000" retries="0" cache="false" />
+
+
+    <dubbo:reference version="1.0.0" check="false" id="orderBillService" interface="com.temsoft.oms.order.service.OrderBillService">
+    </dubbo:reference>
+    <dubbo:reference version="1.0.0" check="false" id="orderFindService" interface="com.temsoft.oms.order.service.OrderFindService">
+    </dubbo:reference>
+    <dubbo:reference version="1.0.0" check="false" id="orderCreateService" interface="com.temsoft.oms.order.service.OrderCreateService">
+    </dubbo:reference>
+    <dubbo:reference version="1.0.0" check="false" id="orderOptService" interface="com.temsoft.oms.order.service.OrderOptService">
+    </dubbo:reference>
+
+    <!--订单-->
+    <dubbo:reference version="1.0.0" check="false" id="ordersMngService" interface="com.temsoft.oms.order.service.OrdersMngService">
+    </dubbo:reference>
+    <dubbo:reference version="1.0.0" check="false" id="ordersRefundService" interface="com.temsoft.oms.order.service.OrdersRefundService">
+        <dubbo:method name="canalOrders" timeout="20000" retries="0"/>
+        <dubbo:method name="applyRefundOrder" timeout="10000" retries="0"/>
+        <dubbo:method name="canRefund" timeout="10000" retries="0"/>
+        <dubbo:method name="refundToAli" timeout="6000" retries="0"/>
+        <dubbo:method name="refundToAliOk" timeout="6000" retries="0"/>
+        <dubbo:method name="refundToSite" timeout="6000" retries="0"/>
+        <dubbo:method name="refundReject" timeout="6000" retries="0"/>
+    </dubbo:reference>
+    <!--商户结算-->
+    <dubbo:reference version="1.0.0" check="false" id="settlementRuleService" interface="com.temsoft.oms.order.service.SettlementRuleService">
+        <dubbo:method name="save" timeout="6000" retries="0"/>
+        <dubbo:method name="update" timeout="6000" retries="0"/>
+    </dubbo:reference>
+    <dubbo:reference version="1.0.0" check="false" id="settlementBillService" interface="com.temsoft.oms.order.service.SettlementBillService">
+        <dubbo:method name="save" timeout="6000" retries="0"/>
+        <dubbo:method name="update" timeout="6000" retries="0"/>
+    </dubbo:reference>
+
+</beans>
